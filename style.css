@@ -21,11 +21,14 @@ html {
 }
 
 .header > img {
-    margin-top: 10px;
-    height: 4vh;
-    position: absolute;
-    left: 2vw;
-    width: auto;
+  opacity: 0;
+  margin-top: 10px;
+  height: 4vh;
+  position: absolute;
+  left: 2vw;
+  width: auto;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.4s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.4s, colorchange 1s forwards 0.4s;
   }
 
 .align-top {
@@ -75,23 +78,28 @@ html {
   }
   
 .nav > a:nth-child(1) {
-    animation: slide 1s forwards 0.4s, colorchange 1s forwards 0.4s;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.4s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.4s, colorchange 1s forwards 0.4s;
   }
 
 .nav > a:nth-child(2) {
-    animation: slide 1s forwards 0.6s, colorchange 1s forwards 0.6s;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.6s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.6s, colorchange 1s forwards 0.6s;
   }
 
 .nav > a:nth-child(3) {
-    animation: slide 1s forwards 0.8s, colorchange 1s forwards 0.8s;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.8s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 0.8s, colorchange 1s forwards 0.8s;
   }
 
 .nav > a:nth-child(4) {
-    animation: slide 1s forwards 1s, colorchange 1s forwards 1s;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 1s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 1s, colorchange 1s forwards 1s;
   }
 
 .nav > a:nth-child(5) {
-    animation: slide 1s forwards 1.2s, colorchange 1s forwards 1.2s;
+  -webkit-animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 1.2s;
+  animation: slide-top 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) forwards 1.2s, colorchange 1s forwards 1.2s;
   }
 
 @keyframes slide {
@@ -109,6 +117,28 @@ html {
     }
   }
   
+  @-webkit-keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(100px);
+              transform: translateY(100px);
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(100px);
+              transform: translateY(100px);
+    }
+    100% {
+      -webkit-transform: translateY(0px);
+              transform: translateY(0px);
+    }
+  }
+
 @keyframes colorchange {
     0% {
       color: transparent;
@@ -139,6 +169,7 @@ html {
   .header a {
     text-decoration: none;
     color: #fff;
+    background: transparent;
     font-size: 1.2rem;
     font-weight: 500;
     position: relative;
@@ -146,12 +177,16 @@ html {
     z-index: 4;
     width: 90px;
     height: 30px;
+    border: 1.2px solid transparent;
+    border-radius: 2.5px;
   }
   a:hover {
     text-decoration: underline;
-  
+    transition: border-color 1s;
+    border-bottom-color: #000;
     color: #ffffff;
   }
+
   a > p {
     position: absolute;
     left: 50%;
@@ -162,14 +197,12 @@ html {
     transition: 300ms;
     text-transform: uppercase;
     font-weight: 700;
+    color: #000;
   }
-  
+
   a:hover > p {
-    background: linear-gradient(121deg, #db4437, #4285f4, #0f9d58, #f4b400);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-decoration: underline;
+    font-size: 20px;
+    font-weight: 20px;
   }
   
   .header a::after {
@@ -223,6 +256,8 @@ html {
     left: 0px;
     opacity: 0.25;
   }
+
+
 
   @keyframes fadein {
     0% {
@@ -551,4 +586,219 @@ html {
     }
   }
   
+  .card {
+    position: relative;
+    width: 150px;
+    height: 230px;
+    color: #fff;
+    text-shadow:2px 2px 4px rgba(0, 0, 0, 0.7);;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+    animation: mainAnim 1.5s forwards 1.1s;
+  }
   
+  .card:hover {
+    transform: translateY(-20px);
+  }
+  
+  .card::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border-radius: 1.2em;
+  }
+  
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    filter: blur(30px);
+  }
+  
+  .card span {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    z-index: 2;
+    border-radius: 1em;
+  }
+  
+  .card span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+  }
+  
+  .card .content {
+    position: relative;
+    z-index: 10;
+    width: 150px;
+    height: 59vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2em;
+    bottom: 0;
+    left: 0;
+  }
+
+  .card:hover{
+    width: 250px;
+    height: 250px;
+    font-size: 1.3em;
+  }
+
+  .card:hover .content{
+    width: 250px;
+  }
+
+  .card-box{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 250px);
+    grid-gap: 12px;
+    height: 135vh;
+    color: #fff;
+    position: absolute;
+    top: 15vh;
+    left: 54%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    width: 90vw;
+  }
+
+  .card:nth-child(1){
+    background-image: url(team/chetan.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(2){
+    background-image: url(team/gokul.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+  
+  .card:nth-child(3){
+    background-image: url(team/havis.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+  
+  .card:nth-child(4){
+    background-image: url(team/abhineeth.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(5){
+    background-image: url(team/anuthampi.png);
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(6){
+    background-image: url(team/nihal.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(7){
+    background-image: url(team/abhishek.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(8){
+    background-image: url(team/sarang.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(9){
+    background-image: url(team/ananthu.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(10){
+    background-image: url(team/pranay.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(11){
+    background-image: url(team/roshan.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(12){
+    background-image: url(team/sumayya.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(13){
+    background-image: url(team/yazir.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(14){
+    background-image: url(team/abhila.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
+
+  .card:nth-child(15){
+    background-image: url(team/hari.png); 
+    background-position: center; 
+    overflow: hidden;
+    border-radius: 1em;
+    border: 1px solid #000;
+  }
